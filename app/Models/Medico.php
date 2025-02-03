@@ -18,6 +18,12 @@ class Medico extends Model
         'cidade_id',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     public function cidade(): HasOne
     {
         return $this->hasOne(Cidade::class);

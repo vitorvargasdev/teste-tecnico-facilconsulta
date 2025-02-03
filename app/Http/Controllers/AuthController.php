@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\AuthRequest;
+use App\Services\AuthService;
 
 class AuthController extends Controller implements HasMiddleware
 {
+    private $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
+
     /**
      * Get the middleware that should be assigned to the controller.
      */
@@ -27,7 +34,7 @@ class AuthController extends Controller implements HasMiddleware
     public function login(AuthRequest $request)
     {
         $data = $request->validated();
-        if (!$token = Auth::attempt($data)) {
+        if (!$token = $this->authService->attemptLogin($data)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -41,7 +48,7 @@ class AuthController extends Controller implements HasMiddleware
      */
     public function me()
     {
-        return response()->json(Auth::user());
+        return response()->json($this->authService->getAuthenticatedUser());
     }
 
     /**
@@ -51,7 +58,7 @@ class AuthController extends Controller implements HasMiddleware
      */
     public function logout()
     {
-        Auth::logout();
+        $this->authService->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -63,7 +70,7 @@ class AuthController extends Controller implements HasMiddleware
      */
     public function refresh()
     {
-        return $this->respondWithToken(Auth::refresh());
+        return $this->respondWithToken($this->authService->refreshToken());
     }
 
     /**
@@ -78,7 +85,7 @@ class AuthController extends Controller implements HasMiddleware
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60
+            'expires_in' => $this->authService->getTokenTTL()
         ]);
     }
 }

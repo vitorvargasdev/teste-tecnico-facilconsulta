@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class Cidade extends Model
 {
     use HasFactory;
@@ -20,4 +22,9 @@ class Cidade extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function medicos(): HasMany
+    {
+        return $this->hasMany(Medico::class);
+    }
 }
