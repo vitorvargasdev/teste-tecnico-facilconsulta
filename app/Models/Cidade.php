@@ -12,6 +12,12 @@ class Cidade extends Model
     protected $fillable = [
         'id',
         'nome',
-        'uf',
+        'estado',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 }

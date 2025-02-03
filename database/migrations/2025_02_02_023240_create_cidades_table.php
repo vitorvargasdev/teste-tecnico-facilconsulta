@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cidades', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->string('uf', length: 2);
+            $table->string('estado', length: 2);
             $table->timestamps();
             $table->softDeletes('deleted_at', precision: 0);
         });

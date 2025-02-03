@@ -19,7 +19,7 @@ class CidadeFactory extends Factory
     {
         return [
             'nome' => Address::cityPrefix() . ' ' . Address::citySuffix(),
-            'uf' => Address::stateAbbr(),
+            'estado' => Address::stateAbbr(),
         ];
     }
 }
