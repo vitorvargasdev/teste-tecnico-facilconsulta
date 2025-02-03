@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use App\Http\Requests\AuthRequest;
 
 class AuthController extends Controller implements HasMiddleware
 {
@@ -23,11 +24,10 @@ class AuthController extends Controller implements HasMiddleware
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(AuthRequest $request)
     {
-        $credentials = request(['email', 'password']);
-
-        if (! $token = Auth::attempt($credentials)) {
+        $data = $request->validated();
+        if (!$token = Auth::attempt($data)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
