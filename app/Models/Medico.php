@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Medico extends Model
@@ -24,9 +24,9 @@ class Medico extends Model
         'deleted_at',
     ];
 
-    public function cidade(): HasOne
+    public function cidade(): BelongsTo
     {
-        return $this->hasOne(Cidade::class);
+        return $this->belongsTo(Cidade::class);
     }
 
     public function consultas(): HasMany

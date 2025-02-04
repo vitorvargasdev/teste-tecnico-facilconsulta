@@ -25,13 +25,13 @@ class Consulta extends Model
         'deleted_at',
     ];
 
-    public function paciente(): HasOne
+    public function paciente()
     {
-        return $this->hasOne(Paciente::class);
+        return $this->belongsTo(Paciente::class);
     }
 
-    public function medico(): HasOne
+    public function medico()
     {
-        return $this->hasOne(Medico::class);
+        return $this->belongsTo(Medico::class);
     }
 }
