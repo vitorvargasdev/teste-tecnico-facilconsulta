@@ -47,6 +47,7 @@ Para garantir a integridade da aplicação, execute os testes com o PHPUnit:
 
 A aplicação possui **100% de cobertura de testes**. Abaixo está o relátorio de cobertura:
 
+![image](https://github.com/user-attachments/assets/da65787f-09b2-4541-9971-7649384f8ed2)
 
 
 Para gerar o relátorio de cobertura:
