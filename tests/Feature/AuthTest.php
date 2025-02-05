@@ -7,7 +7,7 @@ use Tests\TestCase;
 use \App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class LoginTest extends TestCase
+class AuthTest extends TestCase
 {
     use RefreshDatabase;
 

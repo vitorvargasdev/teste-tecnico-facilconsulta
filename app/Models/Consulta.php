@@ -12,16 +12,26 @@ class Consulta extends Model
 
     protected $fillable = [
         'id',
+        'medico_id',
+        'paciente_id',
         'data',
     ];
 
-    public function paciente(): HasOne
+    protected $hidden = [
+        'medico_id',
+        'paciente_id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    public function paciente()
     {
-        return $this->hasOne(Paciente::class);
+        return $this->belongsTo(Paciente::class);
     }
 
-    public function medico(): HasOne
+    public function medico()
     {
-        return $this->hasOne(Medico::class);
+        return $this->belongsTo(Medico::class);
     }
 }

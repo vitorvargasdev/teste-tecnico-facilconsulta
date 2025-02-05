@@ -21,7 +21,7 @@ class ConsultaFactory extends Factory
         return [
             'medico_id' => Medico::inRandomOrder()->first()->id,
             'paciente_id' => Paciente::inRandomOrder()->first()->id,
-            'data' => fake()->dateTimeBetween("now", "+3 months"),
+            'data' => fake()->dateTimeBetween("-1 year", "+1 year"),
         ];
     }
 }
